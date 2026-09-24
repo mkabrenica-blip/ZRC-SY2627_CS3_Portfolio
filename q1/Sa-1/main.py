@@ -13,7 +13,7 @@ class AssignmentSubmission:
   def __validate_grade(self, score: float) -> bool:
     return 0.0 <= score <= 100.0
 
-  def __check_submission_status(self) -> bool:
+  def __check_submission_status(self):
     self.__is_submitted = len(self.__submitted_file) > 0
     return self.__is_submitted
 
@@ -56,7 +56,7 @@ class AssignmentSubmission:
     return ", ".join(self.__submitted_file)
 
   def get_status_report(self) -> str:
-    return (f"ID: ({self.student_id})\n|Student: {self.student_name}|Status: {self.__submitted_file}\n|Grade: {self.get_grade()}\n")
+    return f"ID: {self.student_id}|Student: {self.student_name}|Status: {self.__check_submission_status()}|Grade: {self.get_grade()}"
 
 student1 = AssignmentSubmission(student_name="Alex Gonzaga", student_id= "pshs-1090-x", assignment_title= "CS-101", due_date= "2026-10-01")
 student2 = AssignmentSubmission(student_name="Adelle", student_id= "pshs-1920-x", assignment_title= "CS-103", due_date= "2026-10-01")
@@ -76,19 +76,19 @@ print("---TEST SENARIO 1: Multiple File via List---")
 student1.add_file("main.py")
 student1.add_file("report.pdf")
 student1.assign_grade(95)
-print(f"Alex's Files: {student1.view_files()}/n")
+print(f"Alex's Files: {student1.view_files()}\n")
 
 print("---TEST SENARIO 2: Removing Files List---")
 student2.add_file("wrong_homework.docx")
 student2.remove_file("wrong_homework.docx")
 student2.add_file("correctproject.py")
 student2.assign_grade(88)
-print(f"Adelle's Files: {student2.view_files()}/n")
+print(f"Adelle's Files: {student2.view_files()}\n")
 
 print("---TEST SENARIO 3: Preventing Duplicate Files---")
 student3.add_file("script.py")
 student3.add_file("script.py") # Should trigger private duplicate check
-print(f"Juan's Files: {student3.view_files()}/n")
+print(f"Juan's Files: {student3.view_files()}\n")
 
 print("---TEST SENARIO 4: Removing file after being graded---")
 student4.add_file("exam_answers.pdf")
